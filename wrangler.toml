@@ -1,0 +1,13 @@
+name = "lynnvoice-proxy"
+main = "src/worker/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+# Referer whitelist, comma separated
+ALLOWED_REFERERS = "https://example.com"
+# Allow empty Referer (direct access)
+ALLOW_EMPTY_REFERER = "false"
+# Cache TTL for media segments (seconds)
+CACHE_MEDIA_TTL = "86400"
+# Cache TTL for manifests (seconds)
+CACHE_MANIFEST_TTL = "30"

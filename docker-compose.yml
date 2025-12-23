@@ -1,0 +1,19 @@
+services:
+  proxy:
+    build: .
+    container_name: lynnvoice-proxy
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - ALLOWED_REFERERS=${ALLOWED_REFERERS:-https://example.com}
+      - ALLOW_EMPTY_REFERER=${ALLOW_EMPTY_REFERER:-false}
+      - CACHE_MEDIA_TTL=${CACHE_MEDIA_TTL:-86400}
+      - CACHE_MANIFEST_TTL=${CACHE_MANIFEST_TTL:-30}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
